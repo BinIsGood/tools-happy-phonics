@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#faf9f5">
+  <meta name="description" content="点一点音标和单词，一起轻松学英语。保存后可以离线学习。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="发音小乐园">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <title>发音小乐园 · 点一点，听一听</title>
+</head>
+<body>
+  <svg class="svg-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="sound" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+  </svg>
+  <header class="site-header page-width">
+    <a class="brand" href="./" aria-label="发音小乐园首页"><img src="./icons/icon.svg" width="38" height="38" alt=""><span>发音小乐园<small>LITTLE SOUNDS, BIG SMILES</small></span></a>
+    <button id="help-button" class="quiet-button" type="button">使用小贴士 <span aria-hidden="true">↗</span></button>
+  </header>
+
+  <main class="page-width">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> 每天听一点，英语近一点</p>
+        <h1 id="page-title">小小音标，<br>大大的<span class="title-accent">发现。</span></h1>
+        <p class="hero-description">点一点音标，听一听单词。<br>从熟悉的小单词开始，和英语交个朋友。</p>
+        <div class="hero-tags"><span>44 个音标</span><span>简单常用词</span><span>支持离线学习</span></div>
+      </div>
+      <div class="sound-garden" aria-hidden="true">
+        <span class="garden-spark spark-one">✧</span><span class="garden-spark spark-two">✦</span>
+        <div class="garden-note note-one">/æ/<small>cat</small></div>
+        <div class="garden-note note-two">/iː/<small>bee</small></div>
+        <div class="garden-note note-three">/əʊ/<small>go</small></div>
+        <div class="garden-caption">hello, little explorer!</div>
+      </div>
+    </section>
+
+    <section class="study-summary" aria-label="学习和离线状态">
+      <div class="summary-icon" aria-hidden="true">✦</div>
+      <div class="summary-copy"><strong id="learning-progress">今天，从一个新声音开始</strong><span id="cache-status" role="status">正在检查离线准备情况…</span></div>
+      <button id="offline-button" class="save-button" type="button"><svg aria-hidden="true"><use href="#download"/></svg><span>保存到本机</span></button>
+    </section>
+
+    <div id="audio-notice" class="audio-notice" hidden><strong>发音素材准备中</strong><span>你可以先浏览音标和例词。音频接入后，点击即可听读音。</span></div>
+
+    <section class="library" aria-labelledby="library-title">
+      <div class="library-heading"><div><p class="eyebrow">LET’S LISTEN</p><h2 id="library-title">今天，想听哪个声音？</h2></div><p class="listening-tip"><svg aria-hidden="true"><use href="#sound"/></svg> 点音标或单词，听标准读音</p></div>
+      <div class="library-toolbar">
+        <div class="filters" role="group" aria-label="选择音标分组"><button type="button" class="filter active" data-filter="all" aria-pressed="true">全部 <span>44</span></button><button type="button" class="filter" data-filter="vowel" aria-pressed="false">元音 <span>20</span></button><button type="button" class="filter" data-filter="consonant" aria-pressed="false">辅音 <span>24</span></button></div>
+        <label class="search"><svg aria-hidden="true"><use href="#search"/></svg><input id="search-input" type="search" placeholder="找音标、单词或中文" aria-label="搜索音标、单词或中文" autocomplete="off"></label>
+      </div>
+      <p id="result-count" class="result-count" aria-live="polite"></p>
+      <div id="phoneme-grid" class="phoneme-grid"></div>
+      <p id="empty-state" class="empty-state" hidden>还没有找到这个声音，换个词再试试吧。</p>
+    </section>
+  </main>
+
+  <footer class="site-footer page-width"><span>一点好奇心，每天一点进步。</span><span>英式音标入门 · <a href="./audio-sources.html">音频来源</a></span></footer>
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <dialog id="help-dialog" aria-labelledby="help-title">
+    <div class="dialog-heading"><h2 id="help-title">学习小贴士</h2><button id="close-help" class="close-button" type="button" aria-label="关闭小贴士">×</button></div>
+    <ol><li><strong>点一点，听一听</strong><p>点击大音标听单个声音，点击单词听完整读音。可以多听几次，轻轻跟着读。</p></li><li><strong>保存后，断网也能学</strong><p>第一次联网时点击“保存到本机”，等到页面提示保存完成。清理浏览器数据后，需要重新保存。</p></li><li><strong>把小乐园放到桌面</strong><p>iPhone：用 Safari 打开，点击“分享”，选择“添加到主屏幕”。Android：在浏览器菜单中选择“添加到主屏幕”或“安装应用”。电脑也可以收藏此页面。</p></li></ol>
+    <p class="dialog-note">例词按英式发音选取；不同地区的读音可能略有差异。/ʊə/ 是传统教学音，部分现代英式读音会并入 /ɔː/。</p>
+  </dialog>
+  <noscript><p class="noscript">请启用浏览器的 JavaScript，以显示音标和播放音频。</p></noscript>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

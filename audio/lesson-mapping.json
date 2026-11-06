@@ -1,0 +1,662 @@
+[
+  {
+    "id": "phoneme-ee",
+    "ipa": "iː",
+    "sourceLessonId": "1",
+    "sourceExamples": [
+      "bee",
+      "we",
+      "read"
+    ],
+    "selectedExamples": [
+      "bee",
+      "we",
+      "read"
+    ]
+  },
+  {
+    "id": "phoneme-ih",
+    "ipa": "ɪ",
+    "sourceLessonId": "6",
+    "sourceExamples": [
+      "little",
+      "sit",
+      "fish"
+    ],
+    "selectedExamples": [
+      "little",
+      "sit",
+      "fish"
+    ]
+  },
+  {
+    "id": "phoneme-e",
+    "ipa": "e",
+    "sourceLessonId": "7",
+    "sourceExamples": [
+      "bed",
+      "red",
+      "egg"
+    ],
+    "selectedExamples": [
+      "bed",
+      "red",
+      "egg"
+    ]
+  },
+  {
+    "id": "phoneme-ae",
+    "ipa": "æ",
+    "sourceLessonId": "8",
+    "sourceExamples": [
+      "mass",
+      "ant",
+      "lamb"
+    ],
+    "selectedExamples": [
+      "cat",
+      "ant",
+      "lamb"
+    ]
+  },
+  {
+    "id": "phoneme-ah",
+    "ipa": "ɑː",
+    "sourceLessonId": "3",
+    "sourceExamples": [
+      "mark",
+      "shark",
+      "father"
+    ],
+    "selectedExamples": [
+      "mark",
+      "shark",
+      "father"
+    ]
+  },
+  {
+    "id": "phoneme-o",
+    "ipa": "ɒ",
+    "sourceLessonId": "11",
+    "sourceExamples": [
+      "dog",
+      "box",
+      "stop"
+    ],
+    "selectedExamples": [
+      "dog",
+      "box",
+      "stop"
+    ]
+  },
+  {
+    "id": "phoneme-aw",
+    "ipa": "ɔː",
+    "sourceLessonId": "4",
+    "sourceExamples": [
+      "caught",
+      "walk",
+      "board"
+    ],
+    "selectedExamples": [
+      "caught",
+      "walk",
+      "board"
+    ]
+  },
+  {
+    "id": "phoneme-uh",
+    "ipa": "ʊ",
+    "sourceLessonId": "12",
+    "sourceExamples": [
+      "book",
+      "good",
+      "full"
+    ],
+    "selectedExamples": [
+      "book",
+      "good",
+      "full"
+    ]
+  },
+  {
+    "id": "phoneme-oo",
+    "ipa": "uː",
+    "sourceLessonId": "5",
+    "sourceExamples": [
+      "cool",
+      "rude",
+      "tooth"
+    ],
+    "selectedExamples": [
+      "cool",
+      "rude",
+      "tooth"
+    ]
+  },
+  {
+    "id": "phoneme-cup",
+    "ipa": "ʌ",
+    "sourceLessonId": "10",
+    "sourceExamples": [
+      "cup",
+      "bus",
+      "sun"
+    ],
+    "selectedExamples": [
+      "cup",
+      "bus",
+      "sun"
+    ]
+  },
+  {
+    "id": "phoneme-er",
+    "ipa": "ɜː",
+    "sourceLessonId": "2",
+    "sourceExamples": [
+      "bird",
+      "word",
+      "work"
+    ],
+    "selectedExamples": [
+      "bird",
+      "word",
+      "work"
+    ]
+  },
+  {
+    "id": "phoneme-schwa",
+    "ipa": "ə",
+    "sourceLessonId": "9",
+    "sourceExamples": [
+      "center",
+      "panda",
+      "actor"
+    ],
+    "selectedExamples": [
+      "center",
+      "panda",
+      "actor"
+    ]
+  },
+  {
+    "id": "phoneme-ay",
+    "ipa": "eɪ",
+    "sourceLessonId": "13",
+    "sourceExamples": [
+      "wait",
+      "late",
+      "hate"
+    ],
+    "selectedExamples": [
+      "wait",
+      "late",
+      "gate"
+    ]
+  },
+  {
+    "id": "phoneme-eye",
+    "ipa": "aɪ",
+    "sourceLessonId": "14",
+    "sourceExamples": [
+      "my",
+      "why",
+      "write"
+    ],
+    "selectedExamples": [
+      "my",
+      "why",
+      "write"
+    ]
+  },
+  {
+    "id": "phoneme-oy",
+    "ipa": "ɔɪ",
+    "sourceLessonId": "15",
+    "sourceExamples": [
+      "noise",
+      "point",
+      "oil"
+    ],
+    "selectedExamples": [
+      "noise",
+      "point",
+      "oil"
+    ]
+  },
+  {
+    "id": "phoneme-ow",
+    "ipa": "aʊ",
+    "sourceLessonId": "16",
+    "sourceExamples": [
+      "mouse",
+      "town",
+      "cloud"
+    ],
+    "selectedExamples": [
+      "mouse",
+      "town",
+      "cloud"
+    ]
+  },
+  {
+    "id": "phoneme-oh",
+    "ipa": "əʊ",
+    "sourceLessonId": "17",
+    "sourceExamples": [
+      "pose",
+      "mode",
+      "know"
+    ],
+    "selectedExamples": [
+      "no",
+      "home",
+      "know"
+    ]
+  },
+  {
+    "id": "phoneme-ear",
+    "ipa": "ɪə",
+    "sourceLessonId": "18",
+    "sourceExamples": [
+      "beer",
+      "mere",
+      "deer"
+    ],
+    "selectedExamples": [
+      "deer",
+      "beer",
+      "mere"
+    ]
+  },
+  {
+    "id": "phoneme-air",
+    "ipa": "eə",
+    "sourceLessonId": "19",
+    "sourceExamples": [
+      "bear",
+      "wear",
+      "fare"
+    ],
+    "selectedExamples": [
+      "bear",
+      "wear",
+      "fare"
+    ]
+  },
+  {
+    "id": "phoneme-ure",
+    "ipa": "ʊə",
+    "sourceLessonId": "20",
+    "sourceExamples": [
+      "poor",
+      "tour",
+      "pure"
+    ],
+    "selectedExamples": [
+      "poor",
+      "tour",
+      "pure"
+    ]
+  },
+  {
+    "id": "phoneme-p",
+    "ipa": "p",
+    "sourceLessonId": "21",
+    "sourceExamples": [
+      "sip",
+      "put",
+      "cup"
+    ],
+    "selectedExamples": [
+      "sip",
+      "put",
+      "cup"
+    ]
+  },
+  {
+    "id": "phoneme-b",
+    "ipa": "b",
+    "sourceLessonId": "32",
+    "sourceExamples": [
+      "bread",
+      "club",
+      "lab"
+    ],
+    "selectedExamples": [
+      "book",
+      "bed",
+      "bus"
+    ]
+  },
+  {
+    "id": "phoneme-t",
+    "ipa": "t",
+    "sourceLessonId": "22",
+    "sourceExamples": [
+      "tomorrow",
+      "today",
+      "top"
+    ],
+    "selectedExamples": [
+      "top",
+      "cat",
+      "sit"
+    ]
+  },
+  {
+    "id": "phoneme-d",
+    "ipa": "d",
+    "sourceLessonId": "33",
+    "sourceExamples": [
+      "dog",
+      "card",
+      "bed"
+    ],
+    "selectedExamples": [
+      "dog",
+      "card",
+      "bed"
+    ]
+  },
+  {
+    "id": "phoneme-k",
+    "ipa": "k",
+    "sourceLessonId": "23",
+    "sourceExamples": [
+      "cat",
+      "cup",
+      "card"
+    ],
+    "selectedExamples": [
+      "cat",
+      "cup",
+      "card"
+    ]
+  },
+  {
+    "id": "phoneme-g",
+    "ipa": "ɡ",
+    "sourceLessonId": "34",
+    "sourceExamples": [
+      "egg",
+      "dig",
+      "gate"
+    ],
+    "selectedExamples": [
+      "egg",
+      "dig",
+      "gate"
+    ]
+  },
+  {
+    "id": "phoneme-f",
+    "ipa": "f",
+    "sourceLessonId": "24",
+    "sourceExamples": [
+      "fish",
+      "free",
+      "floor"
+    ],
+    "selectedExamples": [
+      "fish",
+      "free",
+      "floor"
+    ]
+  },
+  {
+    "id": "phoneme-v",
+    "ipa": "v",
+    "sourceLessonId": "35",
+    "sourceExamples": [
+      "very",
+      "dove",
+      "ever"
+    ],
+    "selectedExamples": [
+      "very",
+      "dove",
+      "ever"
+    ]
+  },
+  {
+    "id": "phoneme-th",
+    "ipa": "θ",
+    "sourceLessonId": "27",
+    "sourceExamples": [
+      "path",
+      "think",
+      "math"
+    ],
+    "selectedExamples": [
+      "path",
+      "think",
+      "math"
+    ]
+  },
+  {
+    "id": "phoneme-dh",
+    "ipa": "ð",
+    "sourceLessonId": "38",
+    "sourceExamples": [
+      "they",
+      "those",
+      "other"
+    ],
+    "selectedExamples": [
+      "they",
+      "those",
+      "other"
+    ]
+  },
+  {
+    "id": "phoneme-s",
+    "ipa": "s",
+    "sourceLessonId": "25",
+    "sourceExamples": [
+      "nice",
+      "bus",
+      "sit"
+    ],
+    "selectedExamples": [
+      "nice",
+      "bus",
+      "sit"
+    ]
+  },
+  {
+    "id": "phoneme-z",
+    "ipa": "z",
+    "sourceLessonId": "36",
+    "sourceExamples": [
+      "seize",
+      "zero",
+      "size"
+    ],
+    "selectedExamples": [
+      "zero",
+      "size",
+      "noise"
+    ]
+  },
+  {
+    "id": "phoneme-sh",
+    "ipa": "ʃ",
+    "sourceLessonId": "26",
+    "sourceExamples": [
+      "ship",
+      "fish",
+      "shirt"
+    ],
+    "selectedExamples": [
+      "ship",
+      "fish",
+      "shirt"
+    ]
+  },
+  {
+    "id": "phoneme-zh",
+    "ipa": "ʒ",
+    "sourceLessonId": "37",
+    "sourceExamples": [
+      "decision",
+      "television",
+      "leisure"
+    ],
+    "selectedExamples": [
+      "decision",
+      "television",
+      "leisure"
+    ]
+  },
+  {
+    "id": "phoneme-h",
+    "ipa": "h",
+    "sourceLessonId": "28",
+    "sourceExamples": [
+      "hut",
+      "hello",
+      "home"
+    ],
+    "selectedExamples": [
+      "hut",
+      "hello",
+      "home"
+    ]
+  },
+  {
+    "id": "phoneme-ch",
+    "ipa": "tʃ",
+    "sourceLessonId": "29",
+    "sourceExamples": [
+      "chick",
+      "coach",
+      "rich"
+    ],
+    "selectedExamples": [
+      "chick",
+      "coach",
+      "rich"
+    ]
+  },
+  {
+    "id": "phoneme-j",
+    "ipa": "dʒ",
+    "sourceLessonId": "40",
+    "sourceExamples": [
+      "jam",
+      "bridge",
+      "July"
+    ],
+    "selectedExamples": [
+      "jam",
+      "bridge",
+      "July"
+    ]
+  },
+  {
+    "id": "phoneme-m",
+    "ipa": "m",
+    "sourceLessonId": "43",
+    "sourceExamples": [
+      "smart",
+      "move",
+      "mud"
+    ],
+    "selectedExamples": [
+      "smart",
+      "move",
+      "mud"
+    ]
+  },
+  {
+    "id": "phoneme-n",
+    "ipa": "n",
+    "sourceLessonId": "44",
+    "sourceExamples": [
+      "no",
+      "hunt",
+      "find"
+    ],
+    "selectedExamples": [
+      "no",
+      "hunt",
+      "find"
+    ]
+  },
+  {
+    "id": "phoneme-ng",
+    "ipa": "ŋ",
+    "sourceLessonId": "45",
+    "sourceExamples": [
+      "spring",
+      "sing",
+      "ink"
+    ],
+    "selectedExamples": [
+      "spring",
+      "sing",
+      "ink"
+    ]
+  },
+  {
+    "id": "phoneme-l",
+    "ipa": "l",
+    "sourceLessonId": "46",
+    "sourceExamples": [
+      "line",
+      "pool",
+      "alive"
+    ],
+    "selectedExamples": [
+      "line",
+      "pool",
+      "alive"
+    ]
+  },
+  {
+    "id": "phoneme-r",
+    "ipa": "r",
+    "sourceLessonId": "39",
+    "sourceExamples": [
+      "read",
+      "grass",
+      "write"
+    ],
+    "selectedExamples": [
+      "read",
+      "grass",
+      "write"
+    ]
+  },
+  {
+    "id": "phoneme-y",
+    "ipa": "j",
+    "sourceLessonId": "48",
+    "sourceExamples": [
+      "yell",
+      "yak",
+      "youth"
+    ],
+    "selectedExamples": [
+      "yell",
+      "yak",
+      "youth"
+    ]
+  },
+  {
+    "id": "phoneme-w",
+    "ipa": "w",
+    "sourceLessonId": "47",
+    "sourceExamples": [
+      "work",
+      "wood",
+      "what"
+    ],
+    "selectedExamples": [
+      "work",
+      "wood",
+      "what"
+    ]
+  }
+]

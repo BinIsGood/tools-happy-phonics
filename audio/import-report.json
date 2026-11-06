@@ -1,0 +1,14 @@
+{
+  "referenceProject": "english-ipa-main",
+  "referenceData": "src/data/phoneticSymbols.ts",
+  "upstreamProject": "phonetic_symbol_web-main",
+  "upstreamExampleMap": "phonetic_words.json",
+  "upstreamMapSha256": "b1baa6b1a88adcb71f43eab73ca988860e564e023e380fb8f8512e4a7a448044",
+  "phonemes": 44,
+  "words": 109,
+  "totalClips": 153,
+  "totalBytes": 2384333,
+  "matching": "Phonemes matched by SHA-256 to reference recordings; words matched by filename, case insensitive.",
+  "encoding": "Decoded from supplied audio, re-encoded as MPEG Layer III, 44.1 kHz mono, 96 kbps.",
+  "review": "Mapping and encoding checked. Word identity/accent listening and mobile-device acceptance remain pending."
+}
