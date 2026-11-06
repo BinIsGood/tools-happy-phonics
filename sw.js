@@ -1,10 +1,10 @@
 /* Increase VERSION whenever publishing changes to the page, content or icons. */
-const VERSION = '4';
+const VERSION = '5';
 const BASE = new URL('./', self.location.href);
 const PREFIX = `little-sounds-shell:${BASE.pathname}:`;
 const SHELL = `${PREFIX}${VERSION}`;
 const AUDIO = `little-sounds-audio:${BASE.pathname}`;
-const FILES = ['./', './index.html', './audio-sources.html', './THIRD_PARTY_NOTICES.txt', './styles.css?v=4', './app.js?v=4', './content.js?v=4', './audio-library.js?v=4', './manifest.webmanifest', './audio/manifest.json', './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
+const FILES = ['./', './index.html', './audio-sources.html', './THIRD_PARTY_NOTICES.txt', './styles.css?v=5', './app.js?v=5', './content.js?v=5', './audio-library.js?v=5', './manifest.webmanifest', './audio/manifest.json', './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 const SHELL_URLS = new Set(FILES.map(path => new URL(path, BASE).href));
 
 // Safari may request only a byte range when loading an audio element, including offline.
