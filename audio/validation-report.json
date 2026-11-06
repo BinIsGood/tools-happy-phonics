@@ -1,5 +1,7 @@
 {
+  "manifestVersion": "3",
   "decoded": 153,
+  "HTTPChecked": 153,
   "failures": [],
   "allPassed": true
 }

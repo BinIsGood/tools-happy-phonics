@@ -80,6 +80,25 @@ test('interrupted shell installation rejects before activating a broken offline 
   assert.equal(w.skipped, false);
 });
 
+test('HTML and module dependencies use the current release URLs and are all cached offline', async () => {
+  const w = worker();
+  await w.lifecycle('install');
+  const [name, entries] = [...w.stores.entries()][0];
+  const version = name.split(':').at(-1);
+  const html = await fs.readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const app = await fs.readFile(new URL('../app.js', import.meta.url), 'utf8');
+  const dependencies = [
+    ...[...html.matchAll(/(?:src|href)="([^"]+\.(?:js|css)\?v=[^"]+)"/g)].map(match => match[1]),
+    ...[...app.matchAll(/^import .+ from '([^']+)'/gm)].map(match => match[1]),
+  ];
+  assert.equal(dependencies.length, 4);
+  for (const dependency of dependencies) {
+    const url = new URL(dependency, 'https://example.test/family-english/');
+    assert.equal(url.searchParams.get('v'), version, dependency);
+    assert.ok(entries.has(url.href), dependency);
+  }
+});
+
 test('offline navigation works under a GitHub Pages repository subdirectory', async () => {
   const w = worker();
   await w.lifecycle('install');

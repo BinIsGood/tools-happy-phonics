@@ -1,11 +1,12 @@
-import {phonemes, clipIds} from './content.js';
+import {phonemes, clipIds} from './content.js?v=4';
+import {createAudioLibrary} from './audio-library.js?v=4';
 
 const $ = selector => document.querySelector(selector);
-const base = new URL('./', location.href);
+const base = new URL('./', import.meta.url);
 const audioCacheName = `little-sounds-audio:${base.pathname}`;
 const audio = new Audio();
 audio.preload = 'none';
-const knownIds = new Set(clipIds);
+const library = createAudioLibrary({base, clipIds});
 let clips = new Map();
 let manifestLoaded = false;
 let filter = 'all';
@@ -55,7 +56,14 @@ function playClip(id, button, phonemeId) {
   stopHighlight();
   if (!manifestLoaded) return toast('正在准备发音列表，请稍等一下。');
   const url = clips.get(id);
-  if (!url) return toast('这段发音还在准备中，接入音频后就可以听啦。');
+  if (!url) {
+    toast('正在更新发音列表…');
+    loadManifest().then(() => {
+      if (sequence !== playSequence) return;
+      toast(clips.has(id) ? '发音已准备好，请再点一下试听。' : '暂时没有读到这段发音，请联网刷新页面后再试。');
+    });
+    return;
+  }
   activeButton = button;
   button.classList.add('playing');
   audio.src = url;
@@ -187,16 +195,7 @@ async function updateOfflineStatus() {
 
 async function loadManifest() {
   try {
-    const response = await fetch(new URL('./audio/manifest.json', base), {cache: 'no-cache'});
-    if (!response.ok) throw new Error('Cannot load audio manifest');
-    const manifest = await response.json();
-    for (const [id, entry] of Object.entries(manifest.clips || {})) {
-      if (!knownIds.has(id) || !entry || typeof entry.path !== 'string') continue;
-      const url = new URL(entry.path, base);
-      if (url.origin !== base.origin || !url.pathname.startsWith(`${base.pathname}audio/`) || !/\.(mp3|wav|m4a|ogg)$/i.test(url.pathname)) continue;
-      url.searchParams.set('v', String(manifest.version || '1'));
-      clips.set(id, url.href);
-    }
+    clips = await library.refresh();
     manifestLoaded = true;
     const notice = $('#audio-notice');
     notice.hidden = clips.size === clipIds.length;
@@ -276,5 +275,10 @@ render();
 updateProgress();
 loadManifest();
 prepareOfflinePage();
-window.addEventListener('online', updateOfflineStatus);
+window.addEventListener('online', loadManifest);
+window.addEventListener('focus', loadManifest);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') loadManifest();
+});
+if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('controllerchange', loadManifest);
 window.addEventListener('offline', updateOfflineStatus);

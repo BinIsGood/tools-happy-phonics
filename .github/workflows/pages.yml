@@ -1,0 +1,71 @@
+name: Check and deploy learning page
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  check-and-package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check offline behavior and audio mappings
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          node --test tests/*.test.js
+          python -m unittest discover -s tests -p 'test_*.py'
+          python tools/check_audio.py --require-complete
+      - uses: actions/configure-pages@v4
+      - name: Package only public learning assets
+        run: |
+          python - <<'PY'
+          import json
+          import shutil
+          from pathlib import Path
+          root = Path.cwd()
+          site = root / 'site'
+          site.mkdir()
+          files = ['index.html', 'audio-sources.html', 'THIRD_PARTY_NOTICES.txt', 'styles.css', 'app.js', 'content.js', 'audio-library.js', 'sw.js', 'manifest.webmanifest', '.nojekyll', 'audio/manifest.json']
+          files += [str(p.relative_to(root)) for p in (root / 'icons').iterdir() if p.is_file()]
+          manifest = json.loads((root / 'audio/manifest.json').read_text(encoding='utf-8'))
+          files += [clip['path'] for clip in manifest['clips'].values()]
+          for name in files:
+              source = root / name
+              target = site / name
+              target.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(source, target)
+          PY
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: check-and-package
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
