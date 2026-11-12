@@ -137,19 +137,3 @@ node --test tests/*.test.js
 python -m unittest discover -s tests -p "test_*.py"
 python tools/check_audio.py
 ```
-
-上线前需要在 Android、iPhone Safari 和电脑浏览器各检查：点击真实录音、连续切换播放、保存全部音频后断网重开、主屏幕启动、搜索、低空间/下载失败提示。实际录音已接入；声音内容、口音一致性和跨设备播放仍需逐条听检与真机验收。
-
-2026-11-06 检查结果：20 项页面点击/映射/更新/离线逻辑测试、4 项 Anki 提取工具测试通过；153 段录音逐文件解码与 HTTP 读取通过。音频清单覆盖率 153/153，无缺失、空文件或映射错误。页面测试包括实际页面代码中全部 176 个按钮的录音选择，以及先打开无音频版本、随后接入录音的更新过程。未完成浏览器目视验收、逐条听检或移动设备实测。
-
-网页运行仍然没有外部依赖；`npm ci` 只安装开发测试使用的 DOM 模拟库，不进入发布或离线包。
-
-第 4 版修复：页面重新获得焦点、恢复可见、联网、离线服务更新或点读缺少映射时，重新获取发音清单；清单加载失败时保留已知可用映射。页面脚本、内容模块和样式使用一致的版本 URL，避免旧离线缓存混入新版。此前已打开的旧版页面需要刷新一次。
-
-参考官方说明（核对日期：2026-11-06）：
-
-- [AnkiDroid 开源项目](https://github.com/ankidroid/Anki-Android)
-- [Anki 导出说明：媒体与兼容选项](https://docs.ankiweb.net/exporting.html)
-- [GitHub Pages 服务与免费仓库范围](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages)
-- [Cloudflare Pages 限制](https://developers.cloudflare.com/pages/platform/limits/)
-- [Cloudflare China Network 服务范围](https://developers.cloudflare.com/china-network/)

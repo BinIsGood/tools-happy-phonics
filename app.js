@@ -1,5 +1,5 @@
-import {phonemes, clipIds} from './content.js?v=5';
-import {createAudioLibrary} from './audio-library.js?v=5';
+import {phonemes, clipIds} from './content.js?v=6';
+import {createAudioLibrary} from './audio-library.js?v=6';
 
 const $ = selector => document.querySelector(selector);
 const base = new URL('./', import.meta.url);
@@ -187,7 +187,9 @@ async function updateOfflineStatus() {
       savedCount = [...clips.values()].filter(url => keys.has(url)).length;
     } catch { /* Browsing remains available if storage is denied. */ }
   }
-  if (offlineReady && savedCount === clipIds.length) label.textContent = '全部发音已保存，断网也能学';
+  const allSaved = offlineReady && clips.size === clipIds.length && savedCount === clipIds.length;
+  $('#offline-button span').textContent = allSaved ? '已全部保存到本地，可离线使用' : '保存到本机';
+  if (allSaved) label.textContent = '全部发音已保存，断网也能学';
   else if (offlineReady && savedCount > 0) label.textContent = `页面已保存 · ${savedCount} 段发音已保存到本机`;
   else if (offlineReady) label.textContent = clips.size ? '页面已保存 · 点击右侧按钮保存发音' : '页面已保存 · 发音素材待补充';
   else label.textContent = '当前可在线使用 · 离线保存需要受支持的浏览器';
