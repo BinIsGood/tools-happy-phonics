@@ -1,11 +1,22 @@
 /* Increase VERSION whenever publishing changes to the page, content or icons. */
-const VERSION = '6';
+const VERSION = '13';
 const BASE = new URL('./', self.location.href);
 const PREFIX = `little-sounds-shell:${BASE.pathname}:`;
 const SHELL = `${PREFIX}${VERSION}`;
 const AUDIO = `little-sounds-audio:${BASE.pathname}`;
-const FILES = ['./', './index.html', './audio-sources.html', './THIRD_PARTY_NOTICES.txt', './styles.css?v=6', './app.js?v=6', './content.js?v=6', './audio-library.js?v=6', './manifest.webmanifest', './audio/manifest.json', './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
-const SHELL_URLS = new Set(FILES.map(path => new URL(path, BASE).href));
+const HOME = new URL('./index.html', BASE).href;
+const MANIFEST = new URL('./audio/manifest.json', BASE).href;
+const PAGES = new Set([HOME, ...['./phonics.html', './pinyin.html', './audio-sources.html'].map(path => new URL(path, BASE).href)]);
+const FILES = [
+  './THIRD_PARTY_NOTICES.txt', './manifest.webmanifest', './icons/icon.svg',
+  './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png',
+];
+const VERSIONED_FILES = ['./styles.css', './navigation.js', './app.js', './content.js', './audio-library.js', './pinyin-content.js', './pinyin.js'];
+const SHELL_URLS = new Set([
+  ...PAGES, MANIFEST,
+  ...FILES.map(path => new URL(path, BASE).href),
+  ...VERSIONED_FILES.map(path => new URL(`${path}?v=${VERSION}`, BASE).href),
+]);
 
 // Safari may request only a byte range when loading an audio element, including offline.
 async function savedAudioResponse(request, response) {
@@ -31,8 +42,7 @@ async function savedAudioResponse(request, response) {
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(SHELL);
-    await cache.addAll([...SHELL_URLS]);
-    await self.skipWaiting();
+    await cache.addAll([...SHELL_URLS].map(url => new Request(url, {cache: 'reload'})));
   })());
 });
 
@@ -58,25 +68,28 @@ self.addEventListener('fetch', event => {
     })());
     return;
   }
-  // Limit navigation fallback to our own entry points, never mask missing files with HTML.
-  const isEntry = url.pathname === BASE.pathname || url.pathname === `${BASE.pathname}index.html`;
-  const isManifest = url.pathname === `${BASE.pathname}audio/manifest.json`;
-  if (isEntry || isManifest) {
+  const canonical = `${url.origin}${url.pathname}`;
+  if (canonical === MANIFEST) {
     event.respondWith((async () => {
       const cache = await caches.open(SHELL);
-      const key = isManifest ? new URL('./audio/manifest.json', BASE).href : new URL('./index.html', BASE).href;
+      let response;
       try {
-        const response = await fetch(request);
-        if (response.ok && response.type !== 'opaque') await cache.put(key, response.clone());
-        return response;
-      } catch { return (await cache.match(key)) || new Response('Please connect once to prepare offline learning.', {status: 503}); }
+        response = await fetch(request);
+        if (response.ok && response.type !== 'opaque') {
+          await cache.put(MANIFEST, response.clone());
+          return response;
+        }
+      } catch {}
+      return (await cache.match(MANIFEST)) || response || new Response('Audio list unavailable', {status: 503});
     })());
     return;
   }
-  if (SHELL_URLS.has(url.href)) {
+  const page = url.pathname === BASE.pathname ? HOME : canonical;
+  const cacheKey = PAGES.has(page) ? page : url.href;
+  if (SHELL_URLS.has(cacheKey)) {
     event.respondWith((async () => {
       const cache = await caches.open(SHELL);
-      return (await cache.match(request)) || fetch(request);
+      return (await cache.match(cacheKey)) || fetch(request);
     })());
   }
 });

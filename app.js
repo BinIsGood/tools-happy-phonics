@@ -1,5 +1,5 @@
-import {phonemes, clipIds} from './content.js?v=6';
-import {createAudioLibrary} from './audio-library.js?v=6';
+import {phonemes, clipIds} from './content.js?v=13';
+import {createAudioLibrary} from './audio-library.js?v=13';
 
 const $ = selector => document.querySelector(selector);
 const base = new URL('./', import.meta.url);
@@ -196,20 +196,23 @@ async function updateOfflineStatus() {
 }
 
 async function loadManifest() {
+  let failed = false;
   try {
     clips = await library.refresh();
-    manifestLoaded = true;
-    const notice = $('#audio-notice');
-    notice.hidden = clips.size === clipIds.length;
-    if (clips.size > 0 && clips.size < clipIds.length) {
-      notice.querySelector('strong').textContent = '部分发音还在准备';
-      notice.querySelector('span').textContent = `已接入 ${clips.size} 段发音，其余内容会继续补充。`;
-    }
   } catch {
-    manifestLoaded = true;
-    $('#audio-notice').hidden = false;
-    $('#audio-notice strong').textContent = '暂时没有读到发音列表';
-    $('#audio-notice span').textContent = '你可以先浏览例词，联网刷新后再试试。';
+    failed = true;
+  }
+  manifestLoaded = true;
+  const notice = $('#audio-notice');
+  notice.hidden = clips.size === clipIds.length;
+  if (clips.size === 0) {
+    notice.querySelector('strong').textContent = failed ? '暂时没有读到发音列表' : '发音素材准备中';
+    notice.querySelector('span').textContent = failed
+      ? '你可以先浏览例词，联网刷新后再试试。'
+      : '你可以先浏览音标和例词。音频接入后，点击即可听读音。';
+  } else if (!notice.hidden) {
+    notice.querySelector('strong').textContent = '部分发音还在准备';
+    notice.querySelector('span').textContent = `已接入 ${clips.size} 段发音，其余内容会继续补充。`;
   }
   await updateOfflineStatus();
 }

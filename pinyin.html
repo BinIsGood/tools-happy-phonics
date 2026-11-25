@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#faf9f5">
+  <meta name="description" content="点读汉语拼音的声母、韵母、整体认读音节和四声。">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css?v=13">
+  <title>拼音学习 · 发音小乐园</title>
+</head>
+<body data-feature="pinyin">
+  <svg class="svg-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="sound" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+  </svg>
+  <header class="site-header page-width learning-header">
+    <a class="brand" href="./index.html" aria-label="发音小乐园首页"><img src="./icons/icon.svg" width="38" height="38" alt=""><span>发音小乐园<small>LITTLE SOUNDS, BIG SMILES</small></span></a>
+    <div class="header-actions">
+      <a class="back-link" href="./index.html"><span aria-hidden="true">←</span> 返回功能选择</a>
+      <button id="help-button" class="quiet-button" type="button">使用小贴士 <span aria-hidden="true">↗</span></button>
+    </div>
+  </header>
+
+  <main class="page-width">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <h1 id="page-title">拼音学习</h1>
+        <p class="hero-description">点一点拼音，听一听例字。<br>试着跟读，再比较同一个音节的四声。</p>
+        <div class="hero-tags"><span>声母和韵母</span><span>整体认读音节</span><span>四声对比</span></div>
+      </div>
+      <div class="sound-garden" aria-hidden="true">
+        <span class="garden-spark spark-one">✧</span><span class="garden-spark spark-two">✦</span>
+        <div class="garden-note note-one">b<small>声母</small></div>
+        <div class="garden-note note-two">ā<small>一声</small></div>
+        <div class="garden-note note-three">yuè<small>月</small></div>
+      </div>
+    </section>
+
+    <section class="study-summary" aria-label="学习和离线状态">
+      <div class="summary-icon" aria-hidden="true">✦</div>
+      <div class="summary-copy"><strong id="learning-progress" aria-live="polite">今天，从一个新声音开始</strong><span id="cache-status" role="status">正在检查离线准备情况…</span></div>
+      <button id="offline-button" class="save-button" type="button" disabled><svg aria-hidden="true"><use href="#download"/></svg><span>保存到本机</span></button>
+    </section>
+
+    <section class="library" aria-labelledby="library-title">
+      <div class="library-heading"><h2 id="library-title">今天，想听哪个拼音？</h2></div>
+      <div class="library-toolbar">
+        <div id="pinyin-filters" class="filters pinyin-filters" role="group" aria-label="选择拼音分组"></div>
+        <label class="search"><svg aria-hidden="true"><use href="#search"/></svg><input id="search-input" type="search" placeholder="找拼音、例字或声调" aria-label="搜索拼音、例字或声调" autocomplete="off"></label>
+      </div>
+      <p id="result-count" class="result-count" aria-live="polite"></p>
+      <div id="pinyin-grid" class="phoneme-grid pinyin-grid"></div>
+      <p id="empty-state" class="empty-state" hidden>没有找到匹配的拼音，换个词再试试。</p>
+    </section>
+  </main>
+
+  <footer class="site-footer page-width"><span>普通话拼音入门</span><a href="./audio-sources.html#pinyin-audio">拼音录音来源</a></footer>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <dialog id="help-dialog" aria-labelledby="help-title">
+    <div class="dialog-heading"><h2 id="help-title">学习小贴士</h2><form method="dialog"><button class="close-button" aria-label="关闭小贴士">×</button></form></div>
+    <ol>
+      <li><strong>先听拼音，再跟读例字</strong><p>点击卡片上的大字听示范。整体认读音节统一用一声示范，标有「示范音节」的声母和韵母播放所标注的音节。点击下方例字，听它在单独读出时的声调。</p></li>
+      <li><strong>用同一个音节比较四声</strong><p>选择「四声」，依次听 mā、má、mǎ、mà，留意声音的高低变化。</p></li>
+      <li><strong>保存录音后离线学习</strong><p>联网时点击「保存到本机」。看到保存完成后，就可以断网点读。</p></li>
+    </ol>
+  </dialog>
+  <noscript><p class="noscript">请启用浏览器的 JavaScript，以显示和点读拼音。</p></noscript>
+  <script defer src="./navigation.js?v=13"></script>
+  <script defer src="./pinyin-content.js?v=13"></script>
+  <script defer src="./pinyin.js?v=13"></script>
+</body>
+</html>

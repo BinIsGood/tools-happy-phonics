@@ -42,10 +42,12 @@ jobs:
           root = Path.cwd()
           site = root / 'site'
           site.mkdir()
-          files = ['index.html', 'audio-sources.html', 'THIRD_PARTY_NOTICES.txt', 'styles.css', 'app.js', 'content.js', 'audio-library.js', 'sw.js', 'manifest.webmanifest', '.nojekyll', 'audio/manifest.json']
+          files = ['index.html', 'phonics.html', 'pinyin.html', 'audio-sources.html', 'THIRD_PARTY_NOTICES.txt', 'styles.css', 'navigation.js', 'app.js', 'content.js', 'audio-library.js', 'pinyin-content.js', 'pinyin.js', 'sw.js', 'manifest.webmanifest', '.nojekyll', 'audio/manifest.json', 'audio/pinyin/manifest.json']
           files += [str(p.relative_to(root)) for p in (root / 'icons').iterdir() if p.is_file()]
           manifest = json.loads((root / 'audio/manifest.json').read_text(encoding='utf-8'))
           files += [clip['path'] for clip in manifest['clips'].values()]
+          pinyin = json.loads((root / 'audio/pinyin/manifest.json').read_text(encoding='utf-8'))
+          files += [f'audio/pinyin/{clip_id}.mp3' for clip_id in pinyin['clips']]
           for name in files:
               source = root / name
               target = site / name

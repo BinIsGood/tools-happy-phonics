@@ -6,4 +6,6 @@ Thumbs.db
 *.apkg
 *.colpkg
 site/
-tests/
+/tests/*
+!/tests/app.test.js
+!/tests/navigation.test.js
