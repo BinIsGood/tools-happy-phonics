@@ -85,11 +85,13 @@ test('pinyin groups, tone examples, and all referenced audio match the packaged 
   const counts = lessons.reduce((groups, lesson) => groups.set(lesson.group, (groups.get(lesson.group) || 0) + 1), new Map());
   assert.deepEqual([...counts], [['initial', 23], ['final', 24], ['syllable', 16], ['tone', 4]]);
   assert.equal(new Set(lessons.map(lesson => lesson.id)).size, lessons.length);
-  assert.deepEqual(lessons.filter(lesson => lesson.group === 'tone').map(lesson => lesson.demoClip), ['ma1', 'ma2', 'ma3', 'ma4']);
+  const tones = lessons.filter(lesson => lesson.group === 'tone');
+  assert.deepEqual(tones.map(lesson => lesson.id), ['tone-ma1', 'tone-ma2', 'tone-ma3', 'tone-ma4']);
+  assert.deepEqual(tones.map(lesson => lesson.demoClip), ['ma1', 'ma2-tan', 'ma3', 'ma4']);
   for (const lesson of lessons) {
     assert.ok(lesson.demoClip && lesson.exampleClip, lesson.id);
     if (lesson.group === 'syllable') {
-      assert.equal(lesson.demoClip, `${lesson.symbol}1`, lesson.id);
+      assert.equal(lesson.demoClip.split('-')[0], `${lesson.symbol}1`, lesson.id);
       assert.match(lesson.demoSpelling.normalize('NFD'), /\u0304/, lesson.id);
     }
     if (lesson.demoClip === lesson.exampleClip && lesson.group !== 'tone') {
@@ -97,18 +99,22 @@ test('pinyin groups, tone examples, and all referenced audio match the packaged 
     }
   }
   for (const [id, demoClip, exampleClip, demoSpelling] of [
-    ['initial-s', 'bop-21', 'san1', undefined],
+    ['initial-z', 'initial-z', 'zou3', undefined],
+    ['initial-c', 'initial-c', 'cao3', undefined],
+    ['initial-s', 'initial-s', 'san1', undefined],
     ['final-ui', 'wei1', 'shui3', 'wēi'],
     ['final-iu', 'you1', 'niu2', 'yōu'],
     ['final-ie', 'ye1', 'ye4', 'yē'],
-    ['final-üe', 'yue1', 'yue4', 'yuē'],
+    ['final-üe', 'yue1-tan-final', 'yue4', 'yuē'],
     ['final-un', 'wen1', 'lun2', 'wēn'],
     ['final-ün', 'yun1', 'yun2', 'yūn'],
     ['final-ing', 'ying1', 'xing1', 'yīng'],
     ['final-ong', 'final-ong', 'dong1', undefined],
-    ['syllable-chi', 'chi1', 'chi3', 'chī'],
-    ['syllable-shi', 'shi1', 'shi2', 'shī'],
+    ['syllable-chi', 'chi1-tan', 'chi3', 'chī'],
+    ['syllable-shi', 'shi1-tan', 'shi2', 'shī'],
     ['syllable-ri', 'ri1', 'ri4', 'rī'],
+    ['syllable-yue', 'yue1-tan', 'yue4', 'yuē'],
+    ['tone-ma2', 'ma2-tan', 'ma2-tan', undefined],
   ]) {
     const lesson = lessons.find(lesson => lesson.id === id);
     assert.deepEqual([lesson.demoClip, lesson.exampleClip, lesson.demoSpelling], [demoClip, exampleClip, demoSpelling], id);
@@ -119,6 +125,14 @@ test('pinyin groups, tone examples, and all referenced audio match the packaged 
   assert.deepEqual(Object.keys(clips).sort(), expected);
   assert.equal(clips['final-ong'].sourceFile, 'cmn-song1.mp3');
   assert.deepEqual(clips['final-ong'].trimSeconds, [0.53, 0.93]);
+  for (const [id, wav, end] of [['initial-z', 19, 0.10], ['initial-c', 20, 0.17], ['initial-s', 21, 0.18]]) {
+    assert.equal(clips[id].sourceFile, `audio/F${wav}.WAV`);
+    assert.deepEqual(clips[id].trimSeconds, [0, end]);
+  }
+  for (const [id, character] of [['chi1-tan', '吃'], ['shi1-tan', '诗'], ['yue1-tan', '约'], ['yue1-tan-final', '曰'], ['ma2-tan', '麻']]) {
+    assert.equal(clips[id].sourceSet, 'hsk');
+    assert.equal(clips[id].sourceFile, `cmn-${character}.mp3`);
+  }
   for (const id of expected) {
     const bytes = await fs.readFile(new URL(`${id}.mp3`, directory));
     assert.ok(bytes.length > 0, id);

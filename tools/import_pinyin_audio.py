@@ -4,6 +4,7 @@ import hashlib
 import json
 import subprocess
 import tempfile
+import urllib.parse
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -13,7 +14,21 @@ from import_local_audio import find_ffmpeg
 
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = 'https://language.moe.gov.tw/001/Upload/files/SITE_CONTENT/M0001/deploy/bopomofo_materials_20170213.zip'
-SYLLABLES = 'https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs'
+CMN = 'https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k'
+SYLLABLES = f'{CMN}/syllabs'
+HSK = f'{CMN}/hsk'
+INITIALS = {
+    'initial-z': (19, 0.10, 22),
+    'initial-c': (20, 0.17, 10),
+    'initial-s': (21, 0.18, 17),
+}
+TAN_RECORDINGS = {
+    'chi1-tan': '吃',
+    'shi1-tan': '诗',
+    'yue1-tan': '约',
+    'yue1-tan-final': '曰',
+    'ma2-tan': '麻',
+}
 
 
 def download(url):
@@ -42,13 +57,22 @@ def main():
         def import_clip(clip_id):
             output = staging / f'{clip_id}.mp3'
             metadata = {}
-            if clip_id.startswith('bop-'):
-                source_name = f"audio/F{int(clip_id.split('-')[1])}.WAV"
+            if clip_id.startswith('bop-') or clip_id in INITIALS:
+                number = INITIALS[clip_id][0] if clip_id in INITIALS else int(clip_id.split('-')[1])
+                source_name = f'audio/F{number}.WAV'
                 with zipfile.ZipFile(archive) as source_zip:
                     wav = source_zip.read(source_name)
+                filters = []
+                if clip_id in INITIALS:
+                    _, end, gain = INITIALS[clip_id]
+                    filters = ['-af', ','.join([
+                        f'atrim=end={end}', f'afade=t=out:st={end - 0.008:.3f}:d=0.008',
+                        f'volume={gain}dB', 'adelay=70:all=1', 'apad=pad_dur=0.17',
+                    ])]
+                    metadata['trimSeconds'] = [0, end]
                 subprocess.run([
                     ffmpeg, '-hide_banner', '-loglevel', 'error', '-i', 'pipe:0', '-ac', '1',
-                    '-ar', '44100', '-b:a', '64k', str(output),
+                    *filters, '-ar', '44100', '-b:a', '64k', str(output),
                 ], input=wav, check=True)
             elif clip_id == 'final-ong':
                 source_name = 'cmn-song1.mp3'
@@ -59,6 +83,10 @@ def main():
                     '-ac', '1', '-ar', '44100', '-b:a', '64k', str(output),
                 ], input=download(f'{SYLLABLES}/{source_name}'), check=True)
                 metadata['trimSeconds'] = [start, end]
+            elif clip_id in TAN_RECORDINGS:
+                source_name = f'cmn-{TAN_RECORDINGS[clip_id]}.mp3'
+                output.write_bytes(download(f'{HSK}/{urllib.parse.quote(source_name)}'))
+                metadata['sourceSet'] = 'hsk'
             else:
                 source_name = f'cmn-{clip_id}.mp3'
                 output.write_bytes(download(f'{SYLLABLES}/{source_name}'))
@@ -69,8 +97,8 @@ def main():
         target.mkdir(parents=True, exist_ok=True)
         for clip_id in clips:
             (target / f'{clip_id}.mp3').write_bytes((staging / f'{clip_id}.mp3').read_bytes())
-        manifest = {'bopomofoSource': ARCHIVE, 'syllableSource': SYLLABLES, 'clips': clips}
-        (target / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
+        manifest = {'bopomofoSource': ARCHIVE, 'syllableSource': SYLLABLES, 'hskSource': HSK, 'clips': clips}
+        (target / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'Imported {len(clips)} pinyin recordings.')
 
 

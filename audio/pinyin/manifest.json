@@ -1,6 +1,7 @@
 {
   "bopomofoSource": "https://language.moe.gov.tw/001/Upload/files/SITE_CONTENT/M0001/deploy/bopomofo_materials_20170213.zip",
   "syllableSource": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/syllabs",
+  "hskSource": "https://raw.githubusercontent.com/hugolpz/audio-cmn/f759a0f18f27690742957619e1248ed91e9b3f2c/64k/hsk",
   "clips": {
     "a1": {
       "sourceFile": "cmn-a1.mp3",
@@ -98,18 +99,6 @@
       "sourceFile": "audio/F18.WAV",
       "sha256": "84b796fdfb5ee6f83f98b7b05c7ac4d3a68bac424f8d8fa87f20ffe3b9a0b61e"
     },
-    "bop-19": {
-      "sourceFile": "audio/F19.WAV",
-      "sha256": "11a5a3b5951c21e86ee6639bfa1aa8e5e9aaa31c288a1a3432f66475459f332d"
-    },
-    "bop-20": {
-      "sourceFile": "audio/F20.WAV",
-      "sha256": "73ec7cbc18274f8ce435cc37b45ea812d950f36a9afb78f031d4b26330a4fe0d"
-    },
-    "bop-21": {
-      "sourceFile": "audio/F21.WAV",
-      "sha256": "7083356b47af89509569658cd9a2da65df3b780d590e0352ea428519f503969b"
-    },
     "bop-22": {
       "sourceFile": "audio/F22.WAV",
       "sha256": "68094fdbd87f91ae996a01ee17810fe803065402401598285e05f76dff937db0"
@@ -178,9 +167,10 @@
       "sourceFile": "cmn-che1.mp3",
       "sha256": "d06706267b12c3fbff0e740725b40afa8dcfc46dc44725379e2b403f0383bf79"
     },
-    "chi1": {
-      "sourceFile": "cmn-chi1.mp3",
-      "sha256": "aeea5db8ed8383c8fdc70e063b21161950aa071591dd81c7d9445c2da355e231"
+    "chi1-tan": {
+      "sourceFile": "cmn-吃.mp3",
+      "sourceSet": "hsk",
+      "sha256": "a306a13c5e490c0013cc278404281c715cc7436dc4d473f9b26b5eef74cc1188"
     },
     "chi3": {
       "sourceFile": "cmn-chi3.mp3",
@@ -234,6 +224,30 @@
       "sourceFile": "cmn-he1.mp3",
       "sha256": "6ba3fec9323dba6540fb91aeb5f908aff4ba9a18f4675be17fffd70faf2781b6"
     },
+    "initial-c": {
+      "sourceFile": "audio/F20.WAV",
+      "trimSeconds": [
+        0,
+        0.17
+      ],
+      "sha256": "4625ea9fe084b3b51f9a7fba1c30e02509d5027ff62ec15708dd82fe20eb3d63"
+    },
+    "initial-s": {
+      "sourceFile": "audio/F21.WAV",
+      "trimSeconds": [
+        0,
+        0.18
+      ],
+      "sha256": "54842287210e0622330513da7f39b6e626a931d9257a848b52c8969ddec5a83a"
+    },
+    "initial-z": {
+      "sourceFile": "audio/F19.WAV",
+      "trimSeconds": [
+        0,
+        0.1
+      ],
+      "sha256": "1b4c7b7ab5b0e929d565ddca42a9cd5fce09761d3ad4ee9a48a4f65311238b4e"
+    },
     "ji1": {
       "sourceFile": "cmn-ji1.mp3",
       "sha256": "86633a0e9d816cf86120a94c0bb726aad6265aa97d95297d7ad5eec6142ac411"
@@ -254,9 +268,10 @@
       "sourceFile": "cmn-ma1.mp3",
       "sha256": "6a3194446f891fceb224d2a2497c284203566a2859cc7e0ac2fe4060be69ec3f"
     },
-    "ma2": {
-      "sourceFile": "cmn-ma2.mp3",
-      "sha256": "d5a70e8c3970a93af83d63c64848e387f00f73f0a99f6390fc4b3ed27ee1ad22"
+    "ma2-tan": {
+      "sourceFile": "cmn-麻.mp3",
+      "sourceSet": "hsk",
+      "sha256": "6d4b7c152e7ec45401671720b5a5c3108d86bd236ba6b2620f9030844837ad6a"
     },
     "ma3": {
       "sourceFile": "cmn-ma3.mp3",
@@ -302,9 +317,10 @@
       "sourceFile": "cmn-san1.mp3",
       "sha256": "c4251f33b5e34a8d8aa5e6f9cf8e8ff0639828d9f14fcde3dd6be75426fe19a1"
     },
-    "shi1": {
-      "sourceFile": "cmn-shi1.mp3",
-      "sha256": "ca6519a8d9b249f22ef28896be6fcbc9ed7489980bcd7b00ca840bc18a59aeee"
+    "shi1-tan": {
+      "sourceFile": "cmn-诗.mp3",
+      "sourceSet": "hsk",
+      "sha256": "34ae37819c42a62e5480490b378344fdbf82c8178f3e8330f4eb7b78b4cc21f2"
     },
     "shi2": {
       "sourceFile": "cmn-shi2.mp3",
@@ -394,9 +410,15 @@
       "sourceFile": "cmn-yuan2.mp3",
       "sha256": "3e34792d86aae32df6c8b8ca3e0af1e1513af56caaf512bd3ad0238f86a98aca"
     },
-    "yue1": {
-      "sourceFile": "cmn-yue1.mp3",
-      "sha256": "3c286e8f3501f2470f1e5a34b45aef01274292ead2777d985982c8aaf3499010"
+    "yue1-tan": {
+      "sourceFile": "cmn-约.mp3",
+      "sourceSet": "hsk",
+      "sha256": "13d974e67caa3d83e4ed978937ddda228f78f4e9817a84eec8d872119899d072"
+    },
+    "yue1-tan-final": {
+      "sourceFile": "cmn-曰.mp3",
+      "sourceSet": "hsk",
+      "sha256": "2041c284f2b290b25504b5bcc047265e79643498b16e92e54dbd34a6faf7d465"
     },
     "yue4": {
       "sourceFile": "cmn-yue4.mp3",

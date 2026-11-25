@@ -1,5 +1,5 @@
 /* Increase VERSION whenever publishing changes to the page, content or icons. */
-const VERSION = '13';
+const VERSION = '14';
 const BASE = new URL('./', self.location.href);
 const PREFIX = `little-sounds-shell:${BASE.pathname}:`;
 const SHELL = `${PREFIX}${VERSION}`;

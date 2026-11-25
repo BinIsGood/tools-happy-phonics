@@ -1,5 +1,5 @@
-import {phonemes, clipIds} from './content.js?v=13';
-import {createAudioLibrary} from './audio-library.js?v=13';
+import {phonemes, clipIds} from './content.js?v=14';
+import {createAudioLibrary} from './audio-library.js?v=14';
 
 const $ = selector => document.querySelector(selector);
 const base = new URL('./', import.meta.url);

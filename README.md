@@ -27,7 +27,7 @@ python -m http.server 4173 --bind 127.0.0.1
 
 ## 已接入的本地素材
 
-拼音录音位于 `audio/pinyin/`，使用注音符号手册开放部件和 Chen Wang 的普通话音节录音。页面上的「拼音录音来源」列有署名和许可。可运行 `python tools/import_pinyin_audio.py` 重建该音频包，需 Node.js 和 FFmpeg。更换拼音录音后请更新 `pinyin.js` 中的音频 URL 版本。
+拼音录音位于 `audio/pinyin/`，使用注音符号手册开放部件和 `audio-cmn` 的普通话录音。页面上的「拼音录音来源」列有署名和许可。可运行 `python tools/import_pinyin_audio.py` 重建该音频包，需 Node.js 和 FFmpeg。替换录音时使用新的录音 ID，或更新 `pinyin.js` 中的音频 URL 版本，以避开旧缓存。
 
 主要素材来源为用户提供的 `phonetic_symbol_web-main`：
 
